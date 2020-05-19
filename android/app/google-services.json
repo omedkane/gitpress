@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "276202639585",
+    "firebase_url": "https://mauripress-d1bc8.firebaseio.com",
+    "project_id": "mauripress-d1bc8",
+    "storage_bucket": "mauripress-d1bc8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276202639585:android:119b616a645f41052f27a0",
+        "android_client_info": {
+          "package_name": "com.example.mauripress"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "276202639585-m90jm5limmmnjr4qndgqltn84usfkpol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2s2E5ZvYmm54h-NNT2di3jRu0_DzR6qg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "276202639585-m90jm5limmmnjr4qndgqltn84usfkpol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

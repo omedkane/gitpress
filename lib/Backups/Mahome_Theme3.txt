@@ -1,0 +1,297 @@
+import 'package:flutter/material.dart';
+import 'package:mauripress/Mahome_SignupAnime.dart';
+import 'package:mauripress/QuickElements.dart';
+import 'Mahome_EnterAnime.dart';
+
+class Dahome extends StatefulWidget {
+  Dahome({Key key, this.title, @required List<AnimationController> controllers})
+      : daanime = EntAnime(controllers[0]),
+        signanime = SignupAnime(controllers[1]),
+        super(key: key);
+  final EntAnime daanime;
+  final SignupAnime signanime;
+  final String title;
+  // Dastate createState() => Dastate(daanime, signanime);
+  Dastate createState() => Dastate();
+  // @override
+}
+
+class Dastate extends State<Dahome> {
+  // Dastate(this.widget.daanime, this.loganime);
+  // final EntAnime widget.daanime;
+  // final SignupAnime loganime;
+  bool cansignup = false;
+  bool gonsignup = false;
+
+  @override
+  Widget build(BuildContext context) {
+    var dawidth = MediaQuery.of(context).size.width;
+    var daheight = MediaQuery.of(context).size.height;
+    double hres(double shit) => daheight * (shit / 830.857);
+    double wres(double shit) => dawidth * (shit / 411.42857);
+    // debugPrint("w: $dawidth , h: $daheight");
+    // var ze =
+    return Scaffold(
+      // resizeToAvoidBottomInset: false,
+      // backgroundColor: Color(0xFF0F111A),
+      backgroundColor: Colors.white,
+      body: AnimatedBuilder(
+        animation:
+            cansignup ? widget.signanime.controller : widget.daanime.controller,
+        builder: (context, child) {
+          return SingleChildScrollView(
+            // alignment: Alignment.center,
+            child: Container(
+              height: daheight,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Spacer(flex: 1),
+                  // SizedBox(height: widget.daanime.topmargin.value),
+                  ClipRect(
+                    child: Align(
+                      heightFactor: widget.daanime.topmargin.value,
+                      child: FadeTransition(
+                        opacity: widget.daanime.opanime,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 40),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                height: widget.daanime
+                                    .capsize(hres(50), hres(0))
+                                    .value,
+                              ),
+                              Text(
+                                "Bienvenue sur",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 20),
+                              ),
+                              SizedBox(height: 5),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    "Mauri",
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 35,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "Pressing",
+                                    style: TextStyle(
+                                        color: Colors.black87,
+                                        fontSize: 35,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  // Container(
+                  //   height: widget.daanime
+                  //       .capsize(hres(70.0), hres(0))
+                  //       .value, //polka ? 40 : 0,
+                  // ),
+                  SizedBox(
+                    height: widget.daanime.capsize(hres(50), hres(0)).value,
+                  ),
+
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                        // height: daheight * 0.7,//widget.daanime.capsize(470.0, 470.0).value,
+                        width: dawidth * 0.95,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          color: Colors.white,
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Align(
+                              alignment: widget.daanime.icontotop.value,
+                              child: Container(
+                                width: widget.daanime
+                                    .getsize(dawidth, dawidth * 0.30)
+                                    .value, //dawidth * 0.85,
+                                // margin: EdgeInsets.only(right: 30),
+                                child: Image(
+                                  // width: dawidth * 0.8,
+                                  image:
+                                      AssetImage("assets/images/Whosbad.png"),
+                                ),
+                              ),
+                            ),
+                            foldable(
+                              dachild: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 20),
+                                child: SizedBox(
+                                  // height: 100,
+                                  width: dawidth * 0.8,
+                                  child: Text(
+                                      "Inscrivez-vous et commencez à utiliser MauriPress !",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 19,
+                                          color: Colors.cyan[300])),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: widget.daanime.capsize(0.0, 20.0).value,
+                            ),
+                            foldable(
+                              dachild: FadeTransition(
+                                opacity: widget.daanime.r_opanime,
+                                child: Column(
+                                  children: <Widget>[
+                                    myInput("Email", false, dawidth, daheight),
+                                    SizedBox(height: 20),
+                                    myInput(
+                                        "Mot de passe", true, dawidth, daheight)
+                                  ],
+                                ),
+                              ),
+                            ),
+                            if (cansignup)
+                              ClipRect(
+                                child: Align(
+                                  heightFactor: widget.signanime.qhfact.value,
+                                  child: Opacity(
+                                    opacity: widget.signanime.qopanime.value,
+                                    child: Wrap(
+                                      direction: Axis.vertical,
+                                      spacing: 20,
+                                      children: <Widget>[
+                                        SizedBox(),
+                                        myInput(
+                                            "Prénom", false, dawidth, daheight),
+                                        myInput(
+                                            "Nom", false, dawidth, daheight),
+                                        // myInput("Adresse", false, dawidth,
+                                        //     daheight),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                            foldable(
+                              dachild: Padding(
+                                padding: const EdgeInsets.only(top: 35),
+                                child: SizedBox(
+                                  width: dawidth * 0.9,
+                                  child: Center(
+                                    child: Text(
+                                      "En s'inscrivant vous agréer à nos conditions générales et notre politique d'utilisation des données",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade400,
+                                          fontSize: 17),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: widget.daanime
+                                  .capsize(hres(50), hres(30))
+                                  .value,
+                            ),
+                            ButtonTheme(
+                              minWidth: widget.daanime
+                                  .capsize(hres(280), hres(200))
+                                  .value,
+                              child: RaisedButton(
+                                  elevation: 1,
+                                  onPressed: () {
+                                    widget.daanime.controller
+                                        .forward()
+                                        .whenComplete(() => {
+                                              setState(() {
+                                                cansignup = true;
+                                              })
+                                            });
+                                  },
+                                  color: widget.signanime.butcol.value,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0)),
+                                  // highlightColor: Colors.black,
+                                  splashColor: Colors.black,
+                                  padding: EdgeInsets.only(top: 15, bottom: 15),
+                                  // shape: ,
+                                  child: Text(
+                                    gonsignup ? "Continuer" : "Se connecter",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                            ),
+                            // SizedBox(
+                            //   height: 5,
+                            // ),
+                            FlatButton(
+                              onPressed: () {
+                                if (!cansignup)
+                                  widget.daanime.controller
+                                      .forward()
+                                      .whenComplete(() => {
+                                            setState(() {
+                                              cansignup = true;
+                                            })
+                                          });
+                                if (!gonsignup)
+                                  widget.signanime.controller
+                                      .forward()
+                                      .whenComplete(() => {
+                                            setState(() {
+                                              gonsignup = true;
+                                            })
+                                          });
+                                else
+                                  widget.signanime.controller
+                                      .reverse()
+                                      .whenComplete(() => {
+                                            setState(() {
+                                              gonsignup = false;
+                                            })
+                                          });
+                              },
+                              // color: Colors.blue.shade300,
+                              padding: EdgeInsets.only(top: 14, bottom: 14),
+                              // shape: ,
+                              child: Text(
+                                "${gonsignup ? 'J\'ai un' : 'Je n\'ai pas de'} compte !",
+                                style: TextStyle(
+                                    color: Colors.grey.shade500, fontSize: 18),
+                              ),
+                            ),
+                          ],
+                        )),
+                  ),
+                  Spacer(flex: 1)
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  ClipRect foldable({Widget dachild}) => ClipRect(
+        child: Align(
+          heightFactor: widget.daanime.hfact.value,
+          child: dachild,
+        ),
+      );
+}

@@ -1,0 +1,109 @@
+  fonts: 
+    - family: Gilroy
+      fonts:
+        - asset: fonts/Gilroy/Gilroy-Regular.ttf
+          weight: 400
+        - asset: fonts/Gilroy/Gilroy-RegularItalic.ttf
+          weight: 400
+          style: italic
+        - asset: fonts/Gilroy/Gilroy-Medium.ttf
+          weight: 500
+        - asset: fonts/Gilroy/Gilroy-SemiBold.ttf
+          weight: 600
+        - asset: fonts/Gilroy/Gilroy-Bold.ttf
+          weight: 700
+        - asset: fonts/Gilroy/Gilroy-UltraLightItalic.ttf
+          weight: 100
+          style: italic
+
+    - family: Haboro
+      fonts:
+        - asset: fonts/Haboro/HaboroSans-NormLight.otf
+          weight: 100
+        - asset: fonts/Haboro/HaboroSans-NormLightItalic.otf
+          weight: 100
+          style: italic
+        - asset: fonts/Haboro/HaboroSans-NormMedium.otf
+          weight: 500
+        - asset: fonts/Haboro/HaboroSans-NormMediumItalic.otf
+          weight: 500
+          style: italic
+        - asset: fonts/Haboro/HaboroSans-NormRegular.otf
+          weight: 300
+        - asset: fonts/Haboro/HaboroSans-NormRegularItalic.otf
+          weight: 300
+          style: italic
+
+    - family: Haboro-Ext
+      fonts:
+        - asset: fonts/Haboro/HaboroSans-ExtBold.otf
+          weight: 700
+        - asset: fonts/Haboro/HaboroSans-ExtBoldItalic.otf
+          weight: 700
+          style: italic
+        - asset: fonts/Haboro/HaboroSans-ExtExBold.otf
+          weight: 700
+        - asset: fonts/Haboro/HaboroSans-ExtExBoldItalic.otf
+          weight: 700
+          style: italic
+    
+    - family: Manrope
+      fonts:
+        - asset: fonts/Manrope/Manrope-Bold.otf
+          weight: 700
+        - asset: fonts/Manrope/Manrope-ExtraBold.otf
+          weight: 900
+        - asset: fonts/Manrope/Manrope-ExtraLight.otf
+          weight: 100
+        - asset: fonts/Manrope/Manrope-Light.otf
+          weight: 200
+        - asset: fonts/Manrope/Manrope-Medium.otf
+          weight: 500
+        - asset: fonts/Manrope/Manrope-Regular.otf
+          weight: 400
+        - asset: fonts/Manrope/Manrope-SemiBold.otf
+          weight: 600
+    - family: Cera
+      fonts:
+        - asset: fonts/Cera/Cera Compact Pro Bold.otf
+          weight: 700
+        - asset: fonts/Cera/Cera Compact Pro Medium.otf
+          weight: 500
+        - asset: fonts/Cera/Cera Compact Pro Regular.otf
+          weight: 400
+
+    - family: Karla
+      fonts:
+        - asset: fonts/Karla/Karla-Bold.ttf
+          weight: 700
+        - asset: fonts/Karla/Karla-Regular.ttf
+          weight: 400
+
+    - family: Futura
+      fonts:
+        - asset: fonts/Futura/FuturaLTProBold.otf
+          weight: 700
+        - asset: fonts/Futura/FuturaLTProBook.otf
+          weight: 300
+        - asset: fonts/Futura/FuturaLTProDisplay.otf
+          weight: 400
+        - asset: fonts/Futura/FuturaLTProMedium.otf
+          weight: 500
+
+    - family: Jost
+      fonts:
+        - asset: fonts/Jost/Jost-400-Book.otf
+          weight: 400
+        - asset: fonts/Jost/Jost-500-Medium.otf
+          weight: 500
+        - asset: fonts/Jost/Jost-700-Bold.otf
+          weight: 700
+
+    - family: Circular
+      fonts:
+        - asset: fonts/Circular/CircularStd-Bold.ttf
+          weight: 700
+        - asset: fonts/Circular/CircularStd-Book.ttf
+          weight: 400
+        - asset: fonts/Circular/CircularStd-Medium.ttf
+          weight: 500

@@ -1,0 +1,79 @@
+
+import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:mauripress/Providers/AppSettingsProvider.dart';
+import 'package:mauripress/Providers/KartProvider.dart';
+import 'package:mauripress/Providers/PhoneMaster.dart';
+import 'package:mauripress/locator.dart';
+import 'package:provider/provider.dart';
+import 'package:mauripress/Mahome_animator.dart';
+
+// import 'package:mauripress/HomeScreen.dart';
+// import 'Mahome.dart';
+final FlutterLocalNotificationsPlugin daPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future displayNotification() async {
+  var androidSpecifics = AndroidNotificationDetails(
+      'cd17', 'Daniel Hardman', 'Got ousted by force that man !',
+      importance: Importance.Max, priority: Priority.High);
+  var iosSpecifics = IOSNotificationDetails();
+  var daSpecifics = NotificationDetails(androidSpecifics, iosSpecifics);
+  await daPlugin.show(0, "Nouvelle Tâche Pour Vous",
+      'Une nouvelle commande attends la livraison', daSpecifics,
+      payload: 'item x');
+}
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  var initSettingsAndroid = AndroidInitializationSettings('camera');
+  var initSettingsIos = IOSInitializationSettings();
+  var initSettings =
+      InitializationSettings(initSettingsAndroid, initSettingsIos);
+  await daPlugin.initialize(initSettings,
+      onSelectNotification: (String payload) async {
+    print("Heeeeeeelll Yeaaah");
+  });
+
+  // Provider.debugCheckInvalidValueType = null;
+  setupLocator();
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<CartProvider>(
+          lazy: true, create: (context) => CartProvider()),
+      ChangeNotifierProvider(
+          lazy: true, create: (context) => locator.get<PhoneMaster>()),
+      // ChangeNotifierProvider(lazy: true,create: (context) => ClotheCatalogue()),
+      ChangeNotifierProvider(
+          lazy: true, create: (context) => AppSettingsProvider()),
+    ],
+    child: myApp(),
+  ));
+}
+
+class myApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Am Back',
+      theme: ThemeData(
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Colors.white,
+          fontFamily: 'HNow',
+          textTheme: TextTheme(bodyText2: TextStyle(fontSize: 18)),
+          backgroundColor: Colors.white),
+      // home: HomeScreen(
+      //   title: "Yeah Buddy",
+      // ),
+      // home: Consumer<PhoneMaster>(
+      //   builder: (context, umaster, child) {
+      //     return umaster.dauser == null ? HomeAnimator() : HomeScreen();
+      //   },
+      // ),
+      // home: SettingPage(),
+      home: HomeAnimator(),
+      // home: AdminHome(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}

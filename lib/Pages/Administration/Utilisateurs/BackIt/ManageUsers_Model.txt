@@ -1,0 +1,37 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:mauripress/Models/OneUser.dart';
+import 'package:mauripress/Services/DbTalker.dart';
+import 'package:mauripress/locator.dart';
+
+class ManageUsersModel with ChangeNotifier {
+  List<OneUser> allUsers = [];
+  List<OneUser> searchResults = [];
+  int test = 0;
+  // TextEditingController sControl = TextEditingController();
+  ManageUsersModel() {
+    getUsers();
+  }
+  @override
+  void dispose() {}
+  getUsers() async {
+    DbTalker talk2Users = locator.get<Talk2Users>();
+    await talk2Users.ref.getDocuments().then((snap) {
+      allUsers.clear();
+      snap.documents.forEach((elem) {
+        allUsers.add(OneUser.fromMap(elem.data));
+      });
+    });
+    notifyListeners();
+  }
+
+  incTest() {
+    test++;
+    notifyListeners();
+  }
+
+  searchUser(String nawa) {
+    searchResults = allUsers.where((elem) => elem.fullName.contains(nawa));
+    notifyListeners();
+  }
+}

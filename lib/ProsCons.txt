@@ -1,0 +1,21 @@
+
+Advantage of Provider + Get_it {
+	pros {
+		- it is reactive
+		- can access without context
+	}
+	cons {
+		- always present can't dispose of it
+		- doesn't get disposed
+	}
+}
+
+Provider only {
+	pros {
+		-it is reactive
+	}
+	cons {
+		can't get it without context
+		- doesn't get disposed
+	}
+}

@@ -1,0 +1,34 @@
+ChangeNotifierProvider(
+      create: (context) => locator.get<OrderListModel>(),
+      child: Scaffold(
+        appBar: MyAppBar(
+          issetting: false,
+          title: "Commandes",
+          trailing: MyIconButton(
+            daIcon: Icons.calendar_today,
+            daColor: Colors.blue,
+            daFunction: () {},
+          ),
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Center(
+                child:
+                    Text("Dimanche, le 12/04/2020", style: aoiTxt.szA.medfont)),
+            SizedBox(height: 50),
+            Expanded(
+              child: Consumer<OrderListModel>(
+                builder: (context, daModel, child) => ListView.builder(
+                  itemCount: daModel.finaList.length,
+                  itemBuilder: (context, index) => OrderCard(
+                    daLine: daModel.finaList[index],
+                    inList: index != 0 ? true : false,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );

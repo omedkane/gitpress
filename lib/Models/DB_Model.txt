@@ -1,0 +1,28 @@
+users{
+	id,
+	fistName,
+	lastName,
+	address,
+	phoneNumber
+}
+
+clothes {
+	id,
+	nawa,
+	pixi
+}
+
+ordersline{
+	lineid,
+	userid,
+	dadate
+}
+
+orderdoc {
+	orderid,
+	lineid,
+	clotheid,
+	qty
+}
+
+

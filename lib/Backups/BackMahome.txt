@@ -1,0 +1,113 @@
+import 'package:flutter/material.dart';
+
+class Dahome extends StatefulWidget {
+  Dahome({Key key, this.title}) : super(key: key);
+  final String title;
+  @override
+  Dastate createState() => Dastate();
+}
+
+class Dastate extends State<Dahome> {
+  bool polka = false;
+  Widget build(BuildContext context) {
+    var dawidth = MediaQuery.of(context).size.width;
+    var daheight = MediaQuery.of(context).size.height;
+    return Scaffold(
+      // backgroundColor: Color.fromRGBO(41, 45, 62, 1),
+      backgroundColor: Color(0xFF0F111A),
+      // backgroundColor: Color.fromRGBO(43, 45, 92, 1),
+      // backgroundColor: Gradient(colors: null),
+      // appBar: AppBar(
+      //   title: Text("Whatup Oprah"),
+      // ),
+      body: Container(
+        alignment: Alignment.center,
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: 80),
+            Padding(
+              padding: EdgeInsets.only(left: 40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Bienvenue sur",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  SizedBox(height: 5),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        "Mauri",
+                        style: TextStyle(color: Colors.blue, fontSize: 30),
+                      ),
+                      Text(
+                        "Pressing",
+                        style: TextStyle(color: Colors.white, fontSize: 30),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 40),
+            Container(
+              width: dawidth * 0.85,
+              margin: EdgeInsets.only(right: 30),
+              child: Image(
+                // width: dawidth * 0.8,
+                image: AssetImage("assets/images/dalogo.png"),
+              ),
+            ),
+            SizedBox(height: 80),
+            GestureDetector(
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 200),
+                width: 280,
+                child: AnimatedContainer(
+                    duration: Duration(milliseconds: 200),
+                    width: 280,
+                    color: polka ? Colors.blue.shade500 : Colors.white,
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 14, bottom: 14),
+                        child: Text(
+                          "Se connecter",
+                          style: TextStyle(
+                              color:
+                                  !polka ? Colors.blue.shade500 : Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    )),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ButtonTheme(
+              minWidth: 280,
+              child: RaisedButton(
+                onPressed: () => {
+                  setState(() {
+                    polka = !polka;
+                  })
+                },
+                color: Color.fromRGBO(41, 45, 62, 1),
+                padding: EdgeInsets.only(top: 14, bottom: 14),
+                // shape: ,
+                child: Text(
+                  "Je n'ai pas de compte !",
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,101 @@
+          Flexible(
+            flex: 1,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: 150,
+                decoration: BoxDecoration(
+                  color: Color(0xFF292D3E),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                ),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(top: 20.0, left: 20, right: 20),
+                  child: Row(
+                    children: <Widget>[
+                      Flexible(
+                        flex: 2,
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.timer,
+                                    color: Colors.white,
+                                    size: 25,
+                                  ),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                  Text(
+                                    "La dernière fois c'était...",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 19,
+                                        fontStyle: FontStyle.italic),
+                                  )
+                                ],
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 20, top: 5),
+                                child: Column(
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Icon(CupertinoIcons.pencil,
+                                            color: Colors.white),
+                                        SizedBox(width: 15),
+                                        Text("15x T-Shirts",
+                                            style:
+                                                TextStyle(color: Colors.white))
+                                      ],
+                                    ),
+                                    Row(
+                                      children: <Widget>[
+                                        Icon(CupertinoIcons.pencil,
+                                            color: Colors.white),
+                                        SizedBox(width: 15),
+                                        Text("6x Pantalons",
+                                            style:
+                                                TextStyle(color: Colors.white))
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ]),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                "7,500",
+                                style: TextStyle(
+                                    fontSize: 35,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              SizedBox(width: 5),
+                              Text("MRO", style: TextStyle(color: Colors.white))
+                              // Align(
+                              //   alignment: Alignment.center,
+                              //   child: Text("MRO",style: TextStyle(color: Colors.white),),
+                              // )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          )

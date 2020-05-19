@@ -1,0 +1,356 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+import 'package:mauripress/AppStyle.dart';
+import 'package:mauripress/Models/OneUser.dart';
+import 'package:mauripress/Pages/Administration/Utilisateurs/EditUser.dart';
+
+import '../../QuickElements.dart';
+
+Widget homeOption(
+        {double dawidth,
+        IconData daIcon,
+        String daTitle,
+        String daSub,
+        Color daColor = const Color(0xff00D4AF),
+        Function daFunction}) =>
+    Container(
+      width: dawidth * 0.92,
+      height: 85,
+      decoration: BoxDecoration(boxShadow: [gshaded]),
+      child: RaisedButton(
+        onPressed: daFunction,
+        splashColor: Colors.white60,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        color: daColor,
+        // color: Colors.blue[300],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 5, right: 20),
+              child: Icon(
+                daIcon,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
+            Expanded(
+              child: Container(
+                // padding: EdgeInsets.only(top: 20, bottom: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(daTitle,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17)),
+                    SizedBox(height: 2),
+                    Text(
+                      daSub,
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+Widget zhomeOption(
+        {double dawidth,
+        IconData daIcon,
+        String daTitle,
+        String daSub,
+        Color daColor = const Color(0xff00D4AF),
+        Function daFunction}) =>
+    ListTile(
+      onTap: daFunction,
+      contentPadding: EdgeInsets.only(left: 0,top: 5,bottom: 5),
+      leading: Container(
+        alignment: Alignment.center,
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: daColor,
+          boxShadow: [ushaded],
+        ),
+        child: Icon(
+          daIcon,
+          size: 24,
+          color: Colors.white,
+        ),
+      ),
+      title: Text(daTitle, style: blackTxt.szB.medfont),
+      subtitle: Text(daSub, style: greyTxt.szA.medfont),
+    );
+
+class UserTile extends StatelessWidget {
+  final OneUser daUser;
+  final BuildContext context;
+  final bool isAssignment;
+
+  const UserTile({Key key, this.daUser, this.context, this.isAssignment})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: () {
+        Navigator.push(
+            (context), MaterialPageRoute(builder: (_) => EditUser(daUser)));
+      },
+      leading: Container(
+        alignment: Alignment.center,
+        child: Icon(MaterialCommunityIcons.account, color: Colors.white),
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: daUser.rightLevel == 87
+              ? Colors.cyan
+              : (daUser.rightLevel == 85 ? Colors.blue : Color(0xffF8C822)),
+        ),
+      ),
+      title: Text(
+        daUser.fullName,
+        style: blackTxt.szB.medfont,
+      ),
+      subtitle: Text(
+        daUser.address,
+        style: greyTxt.szA.regfont,
+      ),
+      trailing: Icon(
+        Icons.info_outline,
+        color: Colors.cyan,
+        size: 28,
+      ),
+      // padding: EdgeInsets.all(15),
+    );
+  }
+}
+
+Widget aListTile() => ListTile(
+      leading: Container(
+        alignment: Alignment.center,
+        child: Icon(MaterialCommunityIcons.account, color: Colors.white),
+        height: 45,
+        width: 45,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Color(0xffF8C822),
+        ),
+      ),
+      title: Text(
+        "Abdallahi Samba Ly",
+        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+      ),
+      subtitle: Text(
+        "Socogim PA 20",
+        style: TextStyle(color: Colors.grey, fontSize: 17),
+      ),
+      trailing: Icon(
+        Icons.info_outline,
+        color: Colors.cyan,
+        size: 28,
+      ),
+      onTap: () {},
+    );
+
+class SearchBox extends StatefulWidget {
+  final String hintText;
+  final double width;
+
+  const SearchBox({Key key, this.hintText, this.width}) : super(key: key);
+  @override
+  _SearchBoxState createState() => _SearchBoxState();
+}
+
+class _SearchBoxState extends State<SearchBox> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: widget.width,
+      // margin: EdgeInsets.only(top: 10),
+      padding: EdgeInsets.only(top: 4, bottom: 4),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      child: Row(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 10),
+            child: Icon(MaterialCommunityIcons.account_search),
+          ),
+          Expanded(
+            child: TextField(
+              decoration: InputDecoration(
+                  hintText: widget.hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 17)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class UserListTile extends StatelessWidget {
+  final String title;
+  final String value;
+  final bool isImportant;
+  final Widget trailing;
+
+  const UserListTile(
+      {Key key, this.title, this.value, this.isImportant, this.trailing})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => FractionallySizedBox(
+      widthFactor: 1,
+      child: Container(
+          color: isImportant ? Colors.blue[50] : Colors.white,
+          padding: EdgeInsets.only(left: 30, right: 15, top: 12, bottom: 12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(title, style: aoiTxt.szA.regfont),
+                  SizedBox(height: 8),
+                  Text(value, style: blackTxt.szB.medfont),
+                ],
+              ),
+              if (trailing != null) trailing
+            ],
+          )));
+}
+
+class BusyPopUpButton extends StatefulWidget {
+  BusyPopUpButton(this.daUser);
+  final OneUser daUser;
+  @override
+  _BusyPopUpButtonState createState() => _BusyPopUpButtonState();
+}
+
+class _BusyPopUpButtonState extends State<BusyPopUpButton> {
+  bool isBusy = false;
+  String daPriviledge;
+
+  void setBusy(bool daBool) {
+    setState(() {
+      isBusy = daBool;
+    });
+  }
+
+  @override
+  void initState() {
+    daPriviledge = widget.daUser.privilege;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return UserListTile(
+        title: "Privilège:",
+        value: daPriviledge,
+        isImportant: false,
+        trailing: isBusy
+            ? SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(),
+              )
+            : PopupMenuButton(
+                onSelected: (val) {
+                  setBusy(true);
+                  widget.daUser.setPrivilege(val).then((val) {
+                    if (val is String)
+                      setState(() {
+                        daPriviledge = val;
+                      });
+                    else
+                      setState(() {
+                        daPriviledge = "Erreur...";
+                      });
+                  }).whenComplete(() {
+                    setBusy(false);
+                  });
+                },
+                color: Colors.blue,
+                tooltip: "Modifier le privilége",
+                icon: Icon(AntDesign.menu_fold, size: 20, color: Colors.blue),
+                itemBuilder: (context) {
+                  var daList = List<PopupMenuEntry<Object>>();
+                  daList.addAll([
+                    PopupMenuItem(
+                        value: 1,
+                        child: Text("Client", style: whiteTxt.szA.medfont)),
+                    PopupMenuItem(
+                        value: 87,
+                        child: Text("Livreur", style: whiteTxt.szA.medfont)),
+                    PopupMenuItem(
+                        value: 85,
+                        child: Text("Gérant de livraison",
+                            style: whiteTxt.szA.medfont)),
+                  ]);
+                  return daList;
+                },
+              ));
+  }
+}
+
+class SuggestedUser extends StatelessWidget {
+  final OneUser daUser;
+
+  const SuggestedUser({Key key, this.daUser}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            (context), MaterialPageRoute(builder: (_) => EditUser(daUser)));
+      },
+      child: FittedBox(
+        fit: BoxFit.none,
+        child: Container(
+            alignment: Alignment.centerLeft,
+            margin: EdgeInsets.only(left: 15, right: 15),
+            decoration: BoxDecoration(
+              color: midori,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            padding: EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 15),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(right: 15),
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                      color: Colors.white, shape: BoxShape.circle),
+                  child: Icon(MaterialCommunityIcons.worker, color: midori),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(daUser.fullName, style: whiteTxt.szB.boldfont),
+                    SizedBox(height: 5),
+                    Text(daUser.address, style: whiteTxt.szA.medfont)
+                  ],
+                )
+              ],
+            )),
+      ),
+    );
+  }
+}

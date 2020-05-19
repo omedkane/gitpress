@@ -1,0 +1,71 @@
+import 'package:flutter/material.dart';
+import 'package:mauripress/AppStyle.dart';
+import 'package:mauripress/Pages/OrderListPage/OrderList_Compos.dart';
+import 'package:mauripress/Pages/OrderListPage/OrderList_Model.dart';
+import 'package:provider/provider.dart';
+import 'package:visibility_detector/visibility_detector.dart';
+
+class TabContent extends StatelessWidget {
+  final bool isDelivered;
+  const TabContent({
+    Key key,
+    this.isDelivered = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // print('object');
+    return Consumer<OrderListModel>(
+        builder: (context, daModel, child) => Stack(
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: isDelivered
+                              ? daModel.deliveredLines.length
+                              : daModel.notYetLines.length,
+                          itemBuilder: (context, index) {
+                            var whichLine = isDelivered
+                                ? daModel.deliveredLines[index]
+                                : daModel.notYetLines[index];
+                            var daCard = OrderCard(
+                              daLine: whichLine,
+                              inList: true,
+                            );
+                            int dateIndex = daModel.allDates[1].indexOf(index);
+                            if (dateIndex != -1)
+                              return VisibilityDetector(
+                                  key: UniqueKey(),
+                                  onVisibilityChanged: (VisibilityInfo info) {
+                                    if (info.visibleBounds.top < 100) {
+                                      daModel.changeSeenDate(
+                                          daModel.allDates[0][dateIndex]);
+                                    }
+                                  },
+                                  child: daCard);
+                            else
+                              return daCard;
+                          }),
+                    ),
+                  ],
+                ),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    margin: EdgeInsets.only(top: 10),
+                    padding: EdgeInsets.only(
+                        top: 10, bottom: 10, left: 15, right: 15),
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(255, 255, 255, 0.80),
+                      borderRadius: BorderRadius.circular(5),
+                      // boxShadow: [ushaded],
+                    ),
+                    child: Text(daModel.seenNow, style: aoiTxt.szA.medfont),
+                  ),
+                ),
+              ],
+            ));
+  }
+}

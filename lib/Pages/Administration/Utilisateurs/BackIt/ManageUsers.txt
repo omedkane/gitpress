@@ -1,0 +1,92 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+import 'package:mauripress/Pages/Administration/HomeCompos.dart';
+import 'package:mauripress/Pages/Administration/Utilisateurs/ManageUsers_Model.dart';
+import 'package:mauripress/QuickElements.dart';
+import 'package:mauripress/locator.dart';
+import 'package:provider/provider.dart';
+
+class ManageUsers extends StatelessWidget {
+  ManageUsers() {
+    if (!locator.isRegistered<ManageUsersModel>())
+      locator.registerLazySingleton<ManageUsersModel>(() => ManageUsersModel());
+  }
+  // locator.registerLazySingleton<ManageUsersModel>(() => ManageUsersModel());
+  @override
+  Widget build(BuildContext context) {
+    print("Got rebuilt");
+    var dawidth = MediaQuery.of(context).size.width;
+    var daModel = locator.get<ManageUsersModel>();
+    return ChangeNotifierProvider<ManageUsersModel>(
+      create: (context) => locator.get<ManageUsersModel>(),
+      child: Scaffold(
+        // appBar: barMe(title: "Utilisateurs", context: context, issetting: false),
+        appBar: MyAppBar(title: "Utilisateurs", issetting: false),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Center(
+              child: Container(
+                width: dawidth - 30,
+                // margin: EdgeInsets.only(top: 10),
+                padding: EdgeInsets.only(top: 4, bottom: 4),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 10),
+                      child: Icon(MaterialCommunityIcons.account_search),
+                    ),
+                    Expanded(
+                      child: TextField(
+                        onSubmitted: (text) {
+                          print(text);
+                        },
+                        decoration: InputDecoration(
+                            hintText: "Chercher un utilisateur",
+                            border: InputBorder.none,
+                            hintStyle:
+                                TextStyle(color: Colors.grey, fontSize: 17)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: Consumer<ManageUsersModel>(
+                builder: (context, myModel, child) => Text(
+                    "Résultat de recherche: ${myModel.test}",
+                    style: TextStyle(fontSize: 18, color: Colors.cyan)),
+              ),
+            ),
+            // FlatButton(
+            //   child: Icon(Icons.insert_chart),
+            //   onPressed: () {
+            //     myModel.getUsers();
+            //     // print(myModel.allUsers.length);
+            //   },
+            // ),
+            SizedBox(height: 30),
+            Expanded(
+              child: Consumer<ManageUsersModel>(
+                builder: (context, myModel, child) => ListView.builder(
+                  itemCount: myModel.allUsers.length,
+                  itemBuilder: (context, index) {
+                    return userTile(myModel.allUsers[index]);
+                  },
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,237 @@
+import 'package:flutter/material.dart';
+import 'package:mauripress/Mahome_SignupAnime.dart';
+import 'package:mauripress/QuickElements.dart';
+import 'Mahome_EnterAnime.dart';
+
+class Dahome extends StatefulWidget {
+  Dahome({Key key, this.title, @required List<AnimationController> controllers})
+      : daanime = EntAnime(controllers[0]),
+        signanime = SignupAnime(controllers[1]),
+        super(key: key);
+  final EntAnime daanime;
+  final SignupAnime signanime;
+  final String title;
+  // Dastate createState() => Dastate(daanime, signanime);
+  Dastate createState() => Dastate();
+  // @override
+}
+
+class Dastate extends State<Dahome> {
+  // Dastate(this.widget.daanime, this.loganime);
+  // final EntAnime widget.daanime;
+  // final SignupAnime loganime;
+  bool gonsignup = false;
+
+  @override
+  Widget build(BuildContext context) {
+    var dawidth = MediaQuery.of(context).size.width;
+    var daheight = MediaQuery.of(context).size.height;
+    double hres(double shit) => daheight * (shit / daheight);
+    double wres(double shit) => dawidth * (shit / dawidth);
+    // debugPrint("w: $dawidth , h: $daheight");
+    // var ze =
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Color(0xFF0F111A),
+      body: AnimatedBuilder(
+        animation: widget.daanime.controller,
+        builder: (context, child) {
+          return Container(
+            alignment: Alignment.center,
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: widget.daanime.topmargin.value),
+                Opacity(
+                  opacity: widget.signanime.qhfact.value,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 40),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Bienvenue sur",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              "Mauri",
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 30),
+                            ),
+                            Text(
+                              "Pressing",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 30),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  height: widget.daanime
+                      .capsize(hres(40.0), hres(80))
+                      .value, //polka ? 40 : 0,
+                ),
+                Container(
+                    // height: daheight * 0.7,//widget.daanime.capsize(470.0, 470.0).value,
+                    width: dawidth * 0.95,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        color: widget.daanime.towhite.value,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Color.fromRGBO(0, 0, 0, 0.1),
+                              offset: Offset(0, 3),
+                              blurRadius: 5,
+                              spreadRadius: 0)
+                        ]),
+                    child: Column(
+                      children: <Widget>[
+                        Align(
+                          alignment: widget.daanime.icontotop.value,
+                          child: Container(
+                            width: widget.daanime
+                                .getsize(dawidth * 0.85, dawidth * 0.3)
+                                .value, //dawidth * 0.85,
+                            margin: EdgeInsets.only(right: 30),
+                            child: Image(
+                              // width: dawidth * 0.8,
+                              image: AssetImage("assets/images/dalogo.png"),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: widget.daanime.capsize(0.0, 20.0).value,
+                        ),
+                        ClipRect(
+                          child: Align(
+                            heightFactor: widget.daanime.hfact.value,
+                            child: FadeTransition(
+                              opacity: widget.daanime.r_opanime,
+                              child: Column(
+                                children: <Widget>[
+                                  myInput("Email", false, dawidth, daheight),
+                                  SizedBox(height: 20),
+                                  myInput(
+                                      "Mot de passe", true, dawidth, daheight)
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        // if (gonsignup)
+                        // ClipRect(
+                        //   child: Align(
+                        //     heightFactor: widget.signanime.qhfact.value,
+                        //     child: Opacity(
+                        //       opacity: widget.signanime.qopanime.value,
+                        //       child: Column(
+                        //         children: <Widget>[
+                        //           SizedBox(height: 20),
+                        //           myInput(
+                        //               "Nom Complet", false, dawidth, daheight),
+                        //           SizedBox(height: 20),
+                        //           myInput("Adresse", false, dawidth, daheight),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        SizedBox(
+                          height:
+                              widget.daanime.capsize(hres(40), hres(50)).value,
+                        ),
+                        ButtonTheme(
+                          minWidth: 280,
+                          child: RaisedButton(
+                              onPressed: () => {
+                                    widget.daanime.controller
+                                        .forward()
+                                        .whenComplete(() => {
+                                              debugPrint(
+                                                  "daval: ${widget.signanime.qopanime.value}")
+                                            }),
+                                  },
+                              color: Colors.blue.shade500,
+                              // highlightColor: Colors.white,
+                              splashColor: Colors.white,
+                              padding: EdgeInsets.only(top: 14, bottom: 14),
+                              // shape: ,
+                              child: Text(
+                                "Se connecter",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              )),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        ButtonTheme(
+                          minWidth: 280,
+                          child: RaisedButton(
+                            onPressed: () => {
+                              // widget.daanime.controller.stop(),
+                              // loganime.controller.forward()
+                              // loganime.controller.stop(),
+                              // loganime.controller.stop(),
+                              // loganime.controller.reset(),
+                              // widget.daanime.controller.stop(),
+                              widget.signanime.controller
+                                  .forward(from: 0.0)
+                                  .whenComplete(() => {
+                                        debugPrint(
+                                            "daval: ${widget.signanime.qopanime.value}")
+                                      })
+                            },
+                            color: Color.fromRGBO(41, 45, 62, 1),
+                            padding: EdgeInsets.only(top: 14, bottom: 14),
+                            // shape: ,
+                            child: Text(
+                              "Je n'ai pas de compte !",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+// class Dastate extends State<Dahome> {
+//   bool polka = true;
+//   bool tappear = false;
+//   bool ancont = true;
+//   Duration fdur = Duration(milliseconds: 200);
+//   //----------------------------
+
+//   //----------------------------
+//   Widget build(BuildContext context) {
+//     var dawidth = MediaQuery.of(context).size.width;
+//     var daheight = MediaQuery.of(context).size.height;
+//     return Scaffold(
+//         // backgroundColor: Color.fromRGBO(41, 45, 62, 1),
+//         backgroundColor: Color(0xFF0F111A),
+//         // backgroundColor: Color.fromRGBO(43, 45, 92, 1),
+//         // backgroundColor: Gradient(colors: null),
+//         // appBar: AppBar(
+//         //   title: Text("Whatup Oprah"),
+//         // ),
+//         body: AnimatedBuilder(
+//           animation: widget.daanime.controller,
+//           builder: null,
+//         ));
+//   }
+// }
